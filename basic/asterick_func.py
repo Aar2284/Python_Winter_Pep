@@ -34,4 +34,7 @@ output = mixed_func("apple", "banana", "cherry",2,4,5,6,6,3,5,3,
                     field="Computer Science",
                     age=20)
 
-print(output)
+# lambda function 
+
+square = lambda x: x * x
+print(square(5))
