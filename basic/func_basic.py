@@ -64,7 +64,7 @@ else:
 
 # Profile building using functions
 
-def build_profile(first_name, last_name, **user_info): # **user_info -> used to pass variable length of arguments
+def build_profile(first_name, last_name, **user_info): # (** -> allows to pass variable number of keyword arguments)
     profile = {}
     profile['first_name'] = first_name
     profile['last_name'] = last_name
@@ -78,3 +78,26 @@ user_profile = build_profile('Aaryan', 'Kalia',
                                 age=20)
 
 print(user_profile)
+
+# 2Sum using *asqrts
+
+def sum(*args):
+    total = 0
+    for num in args:
+        total += num
+    return total
+result = sum(1,2,3,4,5,6,7,8,9,10)
+print(result)
+
+#using **asqrts to add string values
+
+def build_string(**val):
+    result = ""
+    for key, value in val.items():
+        result += f"{key}: {value}\n"
+    return result
+info = build_string(name="Aaryan Kalia", 
+                    country="India", 
+                    field="Computer Science",
+                    age="20")
+print(info)
