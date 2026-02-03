@@ -33,8 +33,3 @@ output = mixed_func("apple", "banana", "cherry",2,4,5,6,6,3,5,3,
                     country="India",
                     field="Computer Science",
                     age=20)
-
-# lambda function 
-
-square = lambda x: x * x
-print(square(5))
