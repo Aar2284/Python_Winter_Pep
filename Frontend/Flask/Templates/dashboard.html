@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+</head>
+<body>
+
+    <h1>Welcome, {{ user.name }}!</h1>
+
+    {% if user.logged_in %}
+        <p style="color: green;">Status: You are currently logged in.</p>
+    {% else %}
+        <p style="color: red;">Status: You are logged out.</p>
+    {% endif %}
+
+    <h3>Your Hobbies:</h3>
+    <ul>
+        {% for hobby in user.hobbies %}
+            <li>{{ hobby }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
