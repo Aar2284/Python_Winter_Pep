@@ -2,30 +2,37 @@
 
 {% block content %}
 
-    <h1 class="mb-3">Enrolled Students</h1>
+    <h2>Enrolled Students</h2>
     
     <hr style="border-top: 5px solid black; margin-bottom: 30px;">
 
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Course</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             {% for s in students %}
             <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ s.name }}</td>
-                <td>{{ s.email }}</td>
-                <td>{{ s.course }}</td>
+                <td>{{ s['id'] }}</td>
+                <td>{{ s['name'] }}</td>
+                <td>{{ s['email'] }}</td>
+                <td>{{ s['course'] }}</td>
+                
+                <td>
+                    <a href="/delete/{{ s['id'] }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">
+                        Delete
+                    </a>
+                </td>
             </tr>
             {% else %}
             <tr>
-                <td colspan="4" class="text-center text-muted">No students found in database.</td>
+                <td colspan="5" class="text-center">No students registered yet.</td>
             </tr>
             {% endfor %}
         </tbody>
