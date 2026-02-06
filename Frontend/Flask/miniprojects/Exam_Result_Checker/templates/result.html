@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<body>
+
+    <h1>Result for: {{ name }}</h1>
+    <h2>Score: {{ score }} / 100</h2>
+
+    {% if status == "PASSED" %}
+        <h2 style="color: green;">Congratulations! You Passed.</h2>
+    {% else %}
+        <h2 style="color: red;">Alert: You Failed.</h2>
+    {% endif %}
+
+    <hr>
+
+    <h3>Your Recommended Next Steps:</h3>
+    <ul>
+        {% for step in steps %}
+            <li>{{ step }}</li>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <a href="/">Check Another Student</a>
+
+</body>
+</html>

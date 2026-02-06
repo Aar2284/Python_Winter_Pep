@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Emotion Dashboard</title>
+</head>
+
+<body>
+
+    <h1>Hey There, {{ user.name }}! How Are You ?</h1>
+
+    {% if user.logged_in %}
+        <p style="color: green;">Status: You are currently logged in.</p>
+    {% else %}
+        <p style="color: red;">Status: You are logged out.</p>
+    {% endif %}
+
+    <h2>Your Emotions:</h2>
+    <ul>
+        {% for emotion in user.emotions %}
+            <li>{{ emotion }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+
+</html>
