@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+    <h1 class="mb-3">Student Registration</h1>
+    
+    <hr style="border-top: 5px solid black; margin-bottom: 30px;">
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+
+    <div class="card shadow p-4" style="max-width: 600px;">
+        <form method="POST">
+            
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" name="name" class="form-control" placeholder="John Doe" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email Address (@gmail.com only)</label>
+                <input type="email" name="email" class="form-control" placeholder="john@gmail.com" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Select Course</label>
+                <select name="course" class="form-select">
+                    {% for c in courses %}
+                        <option value="{{ c }}">{{ c }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+    </div>
+
+{% endblock %}
