@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My To-Do List</title>
+</head>
+<body>
+
+    <div style="text-align: center; font-family: sans-serif; margin-top: 50px;">
+        
+        <h1>📝 My Daily Tasks</h1>
+        
+        <form action="/add" method="POST">
+            <input type="text" name="task" placeholder="Enter a new task..." required style="padding: 10px; width: 250px;">
+            <button type="submit" style="padding: 10px; background-color: blue; color: white; border: none;">Add Task</button>
+        </form>
+
+        <hr style="width: 50%; margin-top: 30px;">
+
+        <div style="text-align: left; width: 400px; margin: auto;">
+            
+            {% if todos %}
+                <ul style="list-style-type: none; padding: 0;">
+                    
+                    {% for item in todos %}
+                        <li style="background: #f4f4f4; margin: 5px 0; padding: 10px; display: flex; justify-content: space-between;">
+                            
+                            <span>{{ item }}</span>
+
+                            <a href="/delete/{{ loop.index0 }}" style="text-decoration: none; color: red; font-weight: bold;">
+                                ❌
+                            </a>
+
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            {% else %}
+                <p style="color: gray; text-align: center;">No tasks yet.</p>
+            {% endif %}
+            
+        </div>
+
+    </div>
+
+</body>
+</html>
