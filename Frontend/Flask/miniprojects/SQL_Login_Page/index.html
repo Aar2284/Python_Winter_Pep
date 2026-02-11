@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Register</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1 class="title">Register User</h1>
+      <p class="subtitle">Add a username and password to the database.</p>
+
+      <form method="POST">
+        <div class="input">
+          <label for="username">Username</label>
+          <input id="username" type="text" name="username" placeholder="eg. sri_charan" required>
+        </div>
+        <div class="input">
+          <label for="password">Password</label>
+          <input id="password" type="password" name="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit">Save User</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2 class="title" style="font-size:22px;">Users</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>SNo</th>
+            <th>Username</th>
+            <th>Password</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{ user.sno }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.password }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td class="empty" colspan="3">No users yet.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
+<div class="card">
+  <h2 class="title" style="font-size:22px;">Update Password</h2>
+  <p class="subtitle">Enter username and new password.</p>
+
+  <form method="POST" action="/update_password">
+    <div class="input">
+      <label for="upd_username">Username</label>
+      <input id="upd_username" type="text" name="username" placeholder="eg. sri_charan" required>
+    </div>
+    <div class="input">
+      <label for="new_password">New Password</label>
+      <input id="new_password" type="password" name="new_password" placeholder="••••••••" required>
+    </div>
+    <button type="submit">Update Password</button>
+  </form>
+</div>
+<div class="card">
+  <h2 class="title" style="font-size:22px;">Delete User</h2>
+  <p class="subtitle">Enter username to remove the user.</p>
+
+  <form method="POST" action="/delete_user">
+    <div class="input">
+      <label for="del_username">Username</label>
+      <input id="del_username" type="text" name="username" placeholder="eg. sri_charan" required>
+    </div>
+    <button type="submit" style="background:#ef4444;color:#fff;">Delete User</button>
+  </form>
+</div>
