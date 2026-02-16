@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">All Blogs</h2>
+
+<div class="row">
+    {% for post in posts %}
+    <div class="col-md-6 mb-4">
+        <div class="card h-100 border-secondary">
+            <div class="card-body">
+                <h5 class="card-title text-info">{{ post.title }}</h5>
+                <p class="card-text opacity-75">{{ post.content[:100] }}...</p>
+                
+                <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary">
+                    <small class="text-secondary">
+                        By <span class="text-light">{{ post.author.username }}</span> <br>
+                        {{ post.date_posted.strftime('%Y-%m-%d') }}
+                    </small>
+                    <a href="/post/{{ post.id }}" class="btn btn-primary btn-sm">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12 text-center mt-5">
+        <h3 class="text-muted">No blogs found.</h3>
+        <p>Be the first to create one!</p>
+        <a href="/create" class="btn btn-success">Create Blog</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

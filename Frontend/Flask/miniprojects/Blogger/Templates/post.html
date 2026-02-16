@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card border-0">
+    <div class="card-body p-md-5">
+        <h1 class="display-5 text-primary">{{ post.title }}</h1>
+        <p class="text-secondary border-bottom border-secondary pb-3">
+            Written by <strong class="text-light">{{ post.author.username }}</strong> on {{ post.date_posted.strftime('%Y-%m-%d') }}
+        </p>
+        
+        <div class="card-text fs-5 mt-4" style="white-space: pre-wrap;">{{ post.content }}</div>
+
+        <hr class="border-secondary my-5">
+        
+        <div class="d-flex gap-2">
+            <a href="/" class="btn btn-outline-light">Back to Home</a>
+            
+            {% if session.get('user_id') == post.author.id %}
+                <a href="/post/{{ post.id }}/edit" class="btn btn-warning">Edit Blog</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
