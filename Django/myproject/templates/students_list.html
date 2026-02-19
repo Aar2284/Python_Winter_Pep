@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Students List</h2>
+
+<a href="{% url 'add_student' %}">
+    <button>Register New Student</button>
+</a>
+
+<br><br>
+
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Branch</th>
+        <th>Image</th>
+    </tr>
+
+    {% for student in students %}
+    <tr>
+        <td>{{ student.name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.age }}</td>
+        <td>{{ student.branch }}</td>
+        <td>
+            {% if student.image %}
+                <img src="{{ student.image.url }}" width="80">
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>
