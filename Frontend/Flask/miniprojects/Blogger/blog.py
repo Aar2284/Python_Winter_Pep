@@ -31,11 +31,8 @@ with app.app_context():
 
 @app.route('/')
 def home():
-    if 'user' in session:
-        
-        posts = Blog.query.all()
-        return render_template('index.html', posts=posts)
-    return redirect('/login')
+    posts = Blog.query.all()
+    return render_template('index.html', posts=posts)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -96,6 +93,9 @@ def post(post_id):
 
 @app.route('/post/<int:post_id>/edit', methods=['GET', 'POST'])
 def edit_post(post_id):
+    if 'user' not in session:
+        return redirect('/login')
+        
     post = Blog.query.get_or_404(post_id)
 
     if post.author.id != session.get('user_id'):
@@ -116,7 +116,7 @@ def logout():
     session.pop('user', None)
     session.pop('user_id', None)
     flash("You have been logged out.", "success")
-    return redirect('/login')
+    return redirect('/')
 
 if __name__ == "__main__":
     app.run(debug=True)
