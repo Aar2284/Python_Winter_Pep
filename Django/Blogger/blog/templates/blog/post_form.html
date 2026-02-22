@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="content-section">
+    <div class="card bg-dark border-secondary">
+        <div class="card-body">
+            <h2 class="card-title text-info mb-4">
+                {% if object %} Update Blog {% else %} Create Blog {% endif %}
+            </h2>
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group mb-3">
+                    <legend class="border-bottom border-secondary mb-3"></legend>
+                    <div class="mb-3">
+                        <label for="id_title" class="form-label">Title</label>
+                        <input type="text" name="title" maxlength="100" class="form-control" id="id_title" value="{{ object.title|default:'' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_content" class="form-label">Content</label>
+                        <textarea name="content" cols="40" rows="10" class="form-control" id="id_content" required>{{ object.content|default:'' }}</textarea>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Post</button>
+                    <a href="{% url 'blog-home' %}" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

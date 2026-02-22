@@ -1,0 +1,36 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card bg-dark border-secondary">
+            <div class="card-body">
+                <h2 class="card-title text-info mb-4">Login</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Username</label>
+                        {{ form.username.errors }}
+                        <input type="text" name="username" maxlength="150" class="form-control" id="id_username" value="{{ form.username.value|default:'' }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label">Password</label>
+                        {{ form.password.errors }}
+                        <input type="password" name="password" class="form-control" id="id_password" required>
+                    </div>
+                    <button class="btn btn-outline-info w-100" type="submit">Login</button>
+                </form>
+                <div class="border-top border-secondary pt-3 mt-4">
+                    <small class="text-muted">
+                        Don't have an account? <a class="ml-2 text-info" href="{% url 'register' %}">Register Now</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,75 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <article class="content-section">
+            <div class="card glass-panel border-0 p-lg-5">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="flex-shrink-0" style="width: 55px; height: 55px; border-radius: 15px; background: linear-gradient(45deg, #7000ff, #00f2ff); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 1.5rem; box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);">
+                            {{ object.author.username|slice:":1"|upper }}
+                        </div>
+                        <div class="ms-4">
+                            <h5 class="mb-0 fw-bold text-white fs-4">{{ object.author.username }}</h5>
+                            <p class="mb-0 text-muted fs-6">{{ object.date_posted|date:"F d, Y" }} · 5 min read</p>
+                        </div>
+                        <div class="ms-auto">
+                            {% if object.author == user or user.is_staff %}
+                                <div class="btn-group">
+                                    <a class="btn btn-outline-info btn-sm px-3" href="{% url 'post-update' object.id %}">Edit</a>
+                                    <a class="btn btn-outline-danger btn-sm px-3" href="{% url 'post-delete' object.id %}">Delete</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <h1 class="display-3 fw-bold mb-4 text-white lh-sm">{{ object.title }}</h1>
+                    <div class="border-top border-white border-opacity-10 pt-5 mt-4">
+                        <p class="article-content fs-4 text-white opacity-75 lh-base" style="white-space: pre-line;">{{ object.content }}</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <div class="mt-5 p-5 glass-panel">
+            <h3 class="fw-bold mb-4">Conversations <span class="badge bg-primary ms-2 fs-6">{{ comments.count }}</span></h3>
+            
+            {% if user.is_authenticated %}
+            <div class="mb-5">
+                <form action="{% url 'add-comment' object.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ comment_form.content }}
+                    </div>
+                    <button type="submit" class="btn btn-primary px-4 py-2">Share Comment</button>
+                </form>
+            </div>
+            {% else %}
+            <div class="p-4 bg-white bg-opacity-5 rounded-4 border border-white border-opacity-10 text-center mb-5">
+                <p class="mb-0">Want to join the discussion? <a href="{% url 'login' %}" class="text-info fw-bold">Sign in here</a>.</p>
+            </div>
+            {% endif %}
+
+            <div class="comments-list">
+                {% for comment in comments %}
+                <div class="card bg-white bg-opacity-5 border border-white border-opacity-10 mb-4 rounded-4 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <strong class="text-info fs-5">{{ comment.author.username }}</strong>
+                            <span class="mx-2 text-muted">·</span>
+                            <small class="text-muted">{{ comment.date_posted|timesince }} ago</small>
+                        </div>
+                        <p class="mb-0 fs-5 text-white opacity-90">{{ comment.content }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-5">
+                    <p class="text-muted fs-5">No responses yet. Be the first to share your thoughts!</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
