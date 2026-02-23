@@ -30,9 +30,9 @@ else if (!isAdult) {
     console.log("You are not an adult.");
 }
 
-// check if number is positive, negative or zero
+// check if number is positive, negative or zero using input from user side
 
-let number = 0;
+let number = prompt("Enter a number:");
 
 if (number > 0) {
     console.log("The number is positive.");
@@ -42,4 +42,16 @@ else if (number < 0) {
 }
 else {
     console.log("The number is zero.");
+}
+
+// for loop
+for(let i = 0; i < 5; i++) {
+    console.log(i);
+}
+
+// while loop
+let j = 0;
+while (j < 5) {
+    console.log(j);
+    j++;
 }
